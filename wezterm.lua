@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.leader = { key = "b", mods = "CTRL" }
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 100000}
 
 config.font = wezterm.font_with_fallback({
 	"JetBrainsMono Nerd Font",
