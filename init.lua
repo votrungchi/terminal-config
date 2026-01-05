@@ -1,8 +1,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
-vim.o.timeout = false
-vim.o.timeoutlen = 2000
+vim.o.timeout = true
+vim.o.timeoutlen = 1000
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 1000
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
@@ -29,6 +31,15 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+-- Highlight when yanking (copying) text.
+-- Try it with `yap` in normal mode. See `:h vim.hl.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
 -- Trim trailing whitespace on save
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
@@ -40,7 +51,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 -- Keymaps
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+-- vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set({ 't', 'i' }, '<M-h>', '<C-\\><C-n><C-w>h')
 vim.keymap.set({ 't', 'i' }, '<M-j>', '<C-\\><C-n><C-w>j')
 vim.keymap.set({ 't', 'i' }, '<M-k>', '<C-\\><C-n><C-w>k')
@@ -54,7 +65,7 @@ vim.keymap.set({ 'n' }, '<M-Down>', ':resize +3<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<M-Left>', ':vertical resize -3<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<M-Right>', ':vertical resize +3<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>c', ':CopilotChat<CR>')
-vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>')
+vim.keymap.set({ 'n' }, '<leader>t', ':tabnew | terminal<CR>')
 vim.keymap.set({ 'n' }, '<leader>o', ':update<CR> :source<CR>')
 vim.keymap.set({ 'n' }, '<leader>f', ':Pick files<CR>')
 vim.keymap.set({ 'n' }, '<leader>b', ':Pick buffers<CR>')
@@ -80,12 +91,7 @@ vim.pack.add({
   {src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = "v3.x"},
 })
 
-require("mini.pick").setup({
-  mappings = {
-    move_down = '<C-j>',
-    move_up = '<C-k>',
-  }
-})
+require("mini.pick").setup()
 
 require("CopilotChat").setup({
     headers = {
@@ -93,7 +99,6 @@ require("CopilotChat").setup({
       assistant = '🤡 Copilot',
       tool = '🔧 Tool',
     },
-    model = 'gpt-4.1',
     temperature = 0.1,
     window = {
       layout = 'vertical',
