@@ -1,13 +1,13 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 800}
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 800}
 
 config.font = wezterm.font_with_fallback({
 	"JetBrainsMonoNL Nerd Font",
 })
 
-config.font_size = 14.0
+config.font_size = 13.0
 config.color_scheme = "Gruvbox dark, hard (base16)"
 config.enable_tab_bar = true
 config.tab_bar_at_bottom = false
