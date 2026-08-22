@@ -1,10 +1,10 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 800}
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 800}
 
 config.font = wezterm.font_with_fallback({
-	"JetBrainsMonoNL Nerd Font",
+	-- "JetBrainsMonoNL Nerd Font",
 })
 
 config.font_size = 13.0
@@ -17,7 +17,7 @@ config.tab_and_split_indices_are_zero_based = true
 config.scrollback_lines = 20000
 config.term = "xterm-256color"
 
-config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe", "-l" }
+-- config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe", "-l" }
 
 wezterm.on("update-right-status", function(window, pane)
 	-- "Wed Mar 3 08:14"
